@@ -51,7 +51,4 @@ while running:
     pygame.display.update()
     clock.tick(30)
 
-
-
-
 pygame.quit()
