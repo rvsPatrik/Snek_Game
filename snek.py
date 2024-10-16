@@ -7,7 +7,7 @@ import time
 pygame.init()
 
 SCREEN_WIDTH = 800
-SCREEN_HEIGHT = 700
+SCREEN_HEIGHT = 600
 
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption('SNEK')
@@ -19,8 +19,8 @@ GO_TEXT = (255,0,0)
 
 clock = pygame.time.Clock()
 
-snake_size = 20
-snake_speed = 30
+snake_size = 10
+snake_speed = 10
 snake_body = [(SCREEN_WIDTH//2, SCREEN_HEIGHT//2)]
 
 x,y = 0,0
@@ -36,7 +36,7 @@ font = pygame.font.SysFont('arialblack',55)
 
 def game_over_msg():
     message = font.render('Game Over Browski',True,GO_TEXT)
-    screen.blit(message,[SCREEN_WIDTH//4,SCREEN_HEIGHT//4])
+    screen.blit(message,[SCREEN_WIDTH//8,SCREEN_HEIGHT//4])
     pygame.display.update()
     time.sleep(2)
 
@@ -69,6 +69,7 @@ while running:
     if snake_body[0] == food_pos:
         food_pos = generate_food()
         snake_body.append(snake_body[-1])
+        snake_speed+=2
 
     screen.fill(SCREEN_COLOR)
 
@@ -81,6 +82,8 @@ while running:
 
 
     pygame.display.update()
+
+
     clock.tick(snake_speed)
 
 
