@@ -45,8 +45,6 @@ def game_over_msg():
 running = True
 
 while running:
-    snake_direction = pygame.Vector2(0,0)
-
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
@@ -54,18 +52,18 @@ while running:
 
 
         if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_LEFT and not snake_direction[0]>0:
+            if event.key == pygame.K_LEFT and snake_direction != 'right':
                 x,y = -item_size,0
-                snake_direction = pygame.Vector2(-ASD,0)
-            if event.key == pygame.K_RIGHT and not snake_direction[0]<0:
+                snake_direction = 'left'
+            if event.key == pygame.K_RIGHT and snake_direction != 'left':
                 x,y = item_size,0
-                snake_direction = pygame.Vector2(ASD,0)
-            if event.key == pygame.K_UP and not snake_direction[1]>0:
+                snake_direction = 'right'
+            if event.key == pygame.K_UP and snake_direction != 'down':
                 x,y = 0,-item_size
-                snake_direction = pygame.Vector2(0.-ASD)
-            if event.key == pygame.K_DOWN and not snake_direction[1]<0:
+                snake_direction = 'up'
+            if event.key == pygame.K_DOWN and snake_direction != 'up' :
                 x,y = 0,item_size
-                snake_direction = pygame.Vector2(0,ASD)
+                snake_direction = 'down'
 
 
     head = (snake_body[0][0] + x, snake_body[0][1] + y)
@@ -81,10 +79,6 @@ while running:
         snake_speed+=2
 
     screen.fill(SCREEN_COLOR)
-
-    for i in range (0, (SCREEN_HEIGHT+SCREEN_WIDTH)//2,item_size):
-       # pygame.draw.line(screen,SCREEN_COLOR,(i,0),(i))
-       pass
     
     for segment in snake_body:
         pygame.draw.rect(screen,SNEK_COLOR,pygame.Rect(segment[0],segment[1],item_size,item_size))
