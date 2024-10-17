@@ -16,16 +16,21 @@ SCREEN_COLOR = (0,0,0)
 FOOD_COLOR = (255,255,255)
 SNEK_COLOR = (0,255,0)
 GO_TEXT = (255,0,0)
-ASD = 20
+GRID_COLOR = (10,10,10)
 clock = pygame.time.Clock()
 
-item_size = 10
+item_size = 20
 snake_speed = 10
 snake_body = [(SCREEN_WIDTH//2, SCREEN_HEIGHT//2)]
 snake_direction = None
 
 x,y = 0,0
 
+def draw_grid():
+    for x in range(0,SCREEN_WIDTH,item_size):
+        pygame.draw.line(screen,GRID_COLOR,(x,0),(x,SCREEN_HEIGHT))
+    for y in range(0,SCREEN_HEIGHT,item_size):
+        pygame.draw.line(screen,GRID_COLOR,(0,y),(SCREEN_WIDTH,y))
 
 
 def generate_food():
@@ -79,6 +84,8 @@ while running:
         snake_speed+=2
 
     screen.fill(SCREEN_COLOR)
+
+    draw_grid()
     
     for segment in snake_body:
         pygame.draw.rect(screen,SNEK_COLOR,pygame.Rect(segment[0],segment[1],item_size,item_size))
